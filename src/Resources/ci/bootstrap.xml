@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="qabootstrap">
+
+    <!--
+      ${basedir} is defined to the directory of the importing build.xml
+      The build.xml file should be at <project_root>/build.xml
+    -->
+
+    <property name="qabootstrap.projectroot" value="${basedir}" />
+    <property name="qabootstrap.builddir" value="${qabootstrap.projectroot}/build-ci/build" />
+
+    <!-- guess php configuration to use -->
+    <condition property="phpiniscandir" value="/etc/php/7.0/cli/conf.d.noxdebug">
+        <resourceexists>
+            <file file="/etc/php/7.0/cli/conf.d.noxdebug" directory="true" />
+        </resourceexists>
+    </condition>
+    <condition property="phpiniscandir" value="/etc/php5/cli/conf.d.noxdebug">
+        <resourceexists>
+            <file file="/etc/php5/cli/conf.d.noxdebug" directory="true" />
+        </resourceexists>
+    </condition>
+    <property name="phpiniscandir" value="" />
+
+    <property name="composerbin" value="/usr/bin/composer.phar" />
+
+    <!-- clean build dir before vendor update to prevent report of logs (pmd,cs) from previous builds if composer fails -->
+    <delete dir="${qabootstrap.builddir}" />
+
+    <!-- remove composer.lock when it is .gitignore'd and run install (falls back to update in this case) -->
+    <exec executable="git" dir="${qabootstrap.projectroot}">
+        <arg line="clean -fdx -- composer.lock" />
+    </exec>
+
+    <exec executable="php" dir="${qabootstrap.projectroot}" failonerror="true">
+        <env key="PHP_INI_SCAN_DIR" path="${phpiniscandir}" />
+        <arg path="${composerbin}" />
+        <arg value="--no-interaction" />
+        <arg value="--quiet" />
+        <arg value="install" />
+    </exec>
+</project>
