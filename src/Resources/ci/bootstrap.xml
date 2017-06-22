@@ -39,7 +39,7 @@
         <arg value="-dmemory_limit=${composer_memory_limit}" />
         <arg path="${composerbin}" />
         <arg value="--no-interaction" />
-        <arg value="--quiet" />
+        <arg value="-vvv" />
         <arg value="install" />
     </exec>
 </project>
