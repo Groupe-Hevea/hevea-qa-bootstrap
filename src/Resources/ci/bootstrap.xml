@@ -9,6 +9,7 @@
 
     <property name="qabootstrap.projectroot" value="${basedir}" />
     <property name="qabootstrap.builddir" value="${qabootstrap.projectroot}/build-ci/build" />
+    <property name="qabootstrap.vendordir" value="${qabootstrap.projectroot}/vendor" />
 
     <!-- guess php configuration to use -->
     <condition property="phpiniscandir" value="/etc/php/7.0/cli/conf.d.noxdebug">
@@ -28,6 +29,9 @@
 
     <!-- clean build dir before vendor update to prevent report of logs (pmd,cs) from previous builds if composer fails -->
     <delete dir="${qabootstrap.builddir}" />
+
+    <!-- clean vendor dir before update to prevent untracked files errors -->
+    <delete dir="${qabootstrap.vendordir}" />
 
     <!-- remove composer.lock when it is .gitignore'd and run install (falls back to update in this case) -->
     <exec executable="git" dir="${qabootstrap.projectroot}">
