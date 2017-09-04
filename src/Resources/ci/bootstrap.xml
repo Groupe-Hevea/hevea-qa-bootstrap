@@ -31,7 +31,9 @@
     <delete dir="${qabootstrap.builddir}" />
 
     <!-- clean vendor dir before update to prevent untracked files errors -->
-    <delete dir="${qabootstrap.vendordir}" />
+    <delete removeNotFollowedSymlinks="true" includeemptydirs="true">
+        <fileset dir="${qabootstrap.vendordir}" includes="**/*" defaultexcludes="false" followsymlinks="false" erroronmissingdir="false" />
+    </delete>
 
     <!-- remove composer.lock when it is .gitignore'd and run install (falls back to update in this case) -->
     <exec executable="git" dir="${qabootstrap.projectroot}">
