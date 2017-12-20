@@ -25,7 +25,7 @@
     <property name="phpiniscandir" value="" />
 
     <property name="composerbin" value="/usr/bin/composer.phar" />
-    <property name="composer_memory_limit" value="2G" />
+    <property name="composer_memory_limit" value="4G" />
 
     <!-- clean build dir before vendor update to prevent report of logs (pmd,cs) from previous builds if composer fails -->
     <delete dir="${qabootstrap.builddir}" />
