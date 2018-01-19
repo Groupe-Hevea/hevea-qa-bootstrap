@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="qabootstrap">
+<project name="qabootstrap" xmlns:unless="ant:unless">
 
     <!--
       ${basedir} is defined to the directory of the importing build.xml
@@ -41,7 +41,7 @@
     </exec>
 
     <exec executable="php" dir="${qabootstrap.projectroot}" failonerror="true">
-        <env key="PHP_INI_SCAN_DIR" path="${phpiniscandir}" />
+        <env key="PHP_INI_SCAN_DIR" path="${phpiniscandir}" unless:blank="${phpiniscandir}" />
         <arg value="-dmemory_limit=${composer_memory_limit}" />
         <arg path="${composerbin}" />
         <arg value="--no-interaction" />
