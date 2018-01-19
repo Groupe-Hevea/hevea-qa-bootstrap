@@ -12,6 +12,11 @@
     <property name="qabootstrap.vendordir" value="${qabootstrap.projectroot}/vendor" />
 
     <!-- guess php configuration to use -->
+    <condition property="phpiniscandir" value="/etc/php/7.1/cli/conf.d.noxdebug">
+        <resourceexists>
+            <file file="/etc/php/7.1/cli/conf.d.noxdebug" directory="true" />
+        </resourceexists>
+    </condition>
     <condition property="phpiniscandir" value="/etc/php/7.0/cli/conf.d.noxdebug">
         <resourceexists>
             <file file="/etc/php/7.0/cli/conf.d.noxdebug" directory="true" />
