@@ -2,6 +2,14 @@
 
 <project name="qabootstrap" xmlns:unless="ant:unless">
 
+    <echo level="warning">
+        ####################
+        [DEPRECATED]
+        This file (bootstrap.xml) is not required anymore
+        and have to be removed from the build.xml of this project.
+        ####################
+    </echo>
+
     <!--
       ${basedir} is defined to the directory of the importing build.xml
       The build.xml file should be at <project_root>/build.xml
